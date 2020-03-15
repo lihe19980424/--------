@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.neuedu.dao.ProductDao">
+	
+	<sql id="fields">
+	   id,category_id,name,subtitle,main_image mainImage,
+	   sub_images subImages,detail,price,stock,status,is_new isNew,
+	   is_hot isHot,is_banner isBanner,create_time createTime,update_time updateTime
+	</sql>
+	<select id="queryAllPro" resultType="product">
+	   SELECT <include refid="fields"/>
+	   FROM neuedu_product ORDER BY update_time DESC
+	</select>
+	
+	<insert id="addOneProduct" parameterType="product" >
+		INSERT INTO neuedu_product
+		(category_id,name,subtitle,main_image,sub_images,detail,
+		price,stock,status,is_new,is_hot,is_banner,create_time,update_time)
+		VALUES
+		(#{category_id},#{name},#{subtitle},#{mainImage},
+		#{subImages},#{detail},#{price},#{stock},#{status},
+		#{isNew},#{isHot},#{isBanner},NOW(),NOW())
+	</insert>
+	
+	<update id="updateProductStatus" parameterType="product">
+		UPDATE neuedu_product
+		SET status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteProductById" parameterType="int">
+		DELETE FROM neuedu_product
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getProductsByDateAndName" resultType="product" parameterType="map">
+		SELECT <include refid="fields"/>
+	    FROM neuedu_product
+	    <where>
+	    	<if test="beginDate !=null and beginDate != '' and endDate != null and endDate != ''">
+	    		create_time BETWEEN '${beginDate}' AND '${endDate}'
+	    	</if>
+	    	<if test="proName != null and proName !=''">
+	    		AND name LIKE '%${proName}%'
+	    	</if>
+	    </where>
+	</select>
+	
+	<select id="getProductByCateId" resultType="product" parameterType="int">
+	    SELECT <include refid="fields"/>
+	    FROM neuedu_product
+	    WHERE category_id = #{val}
+	</select>
+	
+		
+	<select id="getNewProduct" resultType="product">
+		SELECT <include refid="fields"/>
+		FROM neuedu_product
+		ORDER BY update_time DESC
+		LIMIT 0,8
+	</select>
+	
+	<select id="getProById" resultType="product" parameterType="int">
+		SELECT <include refid="fields"/>
+		FROM neuedu_product
+		WHERE id = #{val}
+	</select>
+	
+	<select id="getNewProByCId" resultType="product" parameterType="map">
+		SELECT <include refid="fields"/>
+		FROM neuedu_product
+		<where>
+			<if test="cId != null">
+				category_id = #{cId} 
+			</if>
+		</where>
+		ORDER BY update_time DESC 
+		LIMIT 0,4
+	</select>
+	
+</mapper>

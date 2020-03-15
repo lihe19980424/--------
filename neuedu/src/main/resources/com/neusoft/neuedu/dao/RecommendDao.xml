@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.neuedu.dao.RecommendDao">
+	
+	<!-- 根据用户ID和CID查询推荐记录  -->
+	<select id="queryRecommend" parameterType="recommend" resultType="recommend">
+		SELECT * 
+		FROM neuedu_recommend
+		WHERE userId = #{userId}
+		AND cId =#{cId}
+	</select>
+	
+	
+	
+	<!-- 添加推荐记录 -->
+	<insert id="addOneCommend" parameterType="recommend">
+		INSERT INTO neuedu_recommend
+		(userId,cId,num)
+		VALUES (#{userId},#{cId},1)
+	</insert>
+	
+	
+	<!-- 修改用户浏览商品的次数 -->
+	<update id="updateOneCommend" parameterType="recommend">
+		UPDATE neuedu_recommend
+		SET num = num+1
+		WHERE userId = #{userId}
+		AND cId = #{cId}
+	</update>
+	
+		<!-- 查询用户是否有浏览记录 -->
+	<select id="queryUserLookLogByUserId" parameterType="int" resultType="recommend" >
+		SELECT userId,cId,num FROM neuedu_recommend 
+		WHERE userId = #{val} 
+		ORDER BY num DESC 
+		LIMIT 0,1
+	</select>
+	
+	
+</mapper>

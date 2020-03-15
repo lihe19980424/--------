@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.neuedu.dao.UserDao">
+    
+    <select id="queryUser" resultType="user" parameterType="string">
+        SELECT * FROM neuedu_user WHERE username = #{username} AND password = #{psw}
+    </select>
+    
+    <select id="queryAllUsers" resultType="user">
+    	SELECT * from neuedu_user
+    </select>
+    
+    <select id="queryUserById" resultType="user">
+    	SELECT * FROM neuedu_user WHERE id = #{val}
+    </select>
+    
+    <update id="updateUserById" parameterType="user">
+    	UPDATE neuedu_user
+    	SET password = #{passWord},
+    	email = #{email},
+    	phone = #{phone},
+    	question = #{question},
+    	answer = #{answer},
+    	update_time = NOW(),
+    	ip = #{ip}
+    	WHERE id = #{id}
+    </update>
+    
+    <!-- 前台========================================================= -->
+    <insert id="addOneUser" parameterType="user">
+    	INSERT INTO neuedu_user
+    	(username,password,phone,role,create_time,update_time)
+    	VALUES(#{userName},#{passWord},#{phone},1,NOW(),NOW())
+    </insert>
+    
+    
+    <select id="queryUserByPhone" resultType="user" parameterType="string">
+    	SELECT * FROM neuedu_user WHERE phone = #{val}
+    	AND role = 1
+    </select>
+    
+        
+    <select id="queryLoginUser" resultType="user" parameterType="map">
+    	SELECT * FROM neuedu_user 
+    	WHERE username = #{username}
+    	AND password = #{psw}
+    	AND role = 1
+    </select>
+    
+    
+</mapper>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-X-admin2.2</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="./css/font.css">
+        <link rel="stylesheet" href="./css/xadmin.css">
+        <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="./js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <form class="layui-form" id="proForm" enctype="multipart/form-data">
+                    <div class="layui-form-item">
+                        <label for="category_id" class="layui-form-label">
+                            <span class="x-red">*</span>类别ID
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="category_id" name="category_id" required="" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <span class="x-red">*</span>请填入类别ID
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="productname" class="layui-form-label">
+                            <span class="x-red">*</span>商品名字
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="productname" name="name" required="" lay-verify="nikename" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="shop_subtitle" class="layui-form-label">
+                            <span class="x-red">*</span>商品副标题
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="shop_subtitle" name="subtitle" required="" lay-verify="pass" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">6到16个字符
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="shop_image" class="layui-form-label">
+                            <span class="x-red">*</span>上传图片
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="file" id="shop_image" name="file"  class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">上传商品图片
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="shop_detail" class="layui-form-label">
+                            <span class="x-red">*</span>商品详情
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="shop_detail" name="detail"  class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">商品详情</div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="shop_price" class="layui-form-label">
+                            <span class="x-red">*</span>商品价格
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="number" id="shop_price" name="price"  class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">商品价格</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="shop_stock" class="layui-form-label">
+                            <span class="x-red">*</span>商品库存</label>
+                        <div class="layui-input-inline">
+                            <input type="number" id="shop_stock" name="stock"  class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">商品库存(必须大于0)</div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="shop_status" class="layui-form-label">
+                            <span class="x-red">*</span>商品状态
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="status">
+                            	<option value="1">在售</option>
+                            	<option value="2">下架</option>
+                            	<option value="3">删除</option>
+                            </select>
+                        <div class="layui-form-mid layui-word-aux">商品状态
+                        </div>
+                     	</div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="shop_is_new" class="layui-form-label">
+                            <span class="x-red">*</span>是否新品
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="isNew">
+                            	<option value="1">是</option>
+                            	<option value="2">否</option>
+                            </select>
+                        <div class="layui-form-mid layui-word-aux">选择是否新品
+                        </div>
+                     	</div>
+                    </div>
+                    
+                    
+                    <div class="layui-form-item">
+                        <label for="shop_is_new" class="layui-form-label">
+                            <span class="x-red">*</span>是否热门
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="isHot">
+                            	<option value="1">是</option>
+                            	<option value="2">否</option>
+                            </select>
+                        <div class="layui-form-mid layui-word-aux">选择是否热门
+                        </div>
+                     	</div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="shop_is_new" class="layui-form-label">
+                            <span class="x-red">*</span>是否轮播
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="isBanner">
+                            	<option value="1">是</option>
+                            	<option value="2">否</option>
+                            </select>
+                        <div class="layui-form-mid layui-word-aux">选择是否轮播
+                        </div>
+                     	</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_repass" class="layui-form-label"></label>
+                        <span class="layui-btn"  id="addBtn">增加</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            layui.use(
+            ['form','jquery'],
+            function() {
+                $ = layui.jquery;
+                var form = layui.form,
+                layer = layui.layer; 
+				$("#addBtn").click(function(){
+					var formData = new FormData($("#proForm")[0]);
+					$.ajax({
+						type:"post",
+						url:"http://localhost:8094/pro/addPro.do",
+						data:formData,
+						contentType:false,
+						processData:false,
+						success:function(response){
+							if(response.status == 0){
+			    				  alert("添加成功");
+			    				  window.location.reload();
+			    			}else{
+			    				  alert("添加失败,请重新添加");
+			    			}
+						}
+					})
+					return false;
+				})				
+            });
+        </script>
+    </body>
+
+</html>

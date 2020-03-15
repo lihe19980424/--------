@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.neuedu.dao.CateDao">
+	
+	<sql id="fields">
+	   id,parent_id,name,status,sort_order,create_time,
+	   update_time,icon
+	</sql>
+	<select id="getAllCate" resultType="category">
+	   SELECT <include refid="fields"/>
+	   FROM neuedu_category
+	</select>
+	
+	<insert id="addOneCate" parameterType="category">
+		INSERT INTO neuedu_category
+		(parent_id,name)
+		VALUES
+		(#{parent_id},#{name})
+	</insert>
+	
+	<select id="queryCateIsExists" resultType="category" parameterType="map">
+		SELECT <include refid="fields"/>
+		FROM neuedu_category
+		WHERE name = '${name}'
+	</select>
+	
+	
+	
+	<update id="updateCategoryById" parameterType="map">
+		UPDATE neuedu_category
+		SET name = '${cname}'
+		WHERE id = #{cid}
+	</update>
+	
+		<select id="queryCateIsContainChildCate" parameterType="int" resultType="category">
+		SELECT <include refid="fields"/>
+		FROM neuedu_category
+		WHERE parent_id = #{val}
+	</select>
+	
+	
+	
+	<delete id="deleteCateById" parameterType="int" >
+		DELETE FROM neuedu_category
+		WHERE id = #{val}
+	</delete>
+	
+</mapper>

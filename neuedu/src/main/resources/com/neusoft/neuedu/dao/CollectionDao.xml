@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.neuedu.dao.CollectionDao">
+    
+    <sql id="sqlCollection">
+    	SELECT id,userId,proId,create_time,update_time
+    	FROM neuedu_collect
+    </sql>
+    
+    <insert id="addOneCoolection" parameterType="collections">
+    	INSERT INTO neuedu_collect
+    	(userId,proId,create_time,update_time)
+    	VALUES(#{userId},#{proId},NOW(),NOW())
+    </insert>
+    
+    <select id="queryCollectionIsExists" resultType="collections" parameterType="collections">
+    	<include refid="sqlCollection"></include>
+    	WHERE userId = #{userId}
+    	AND proId = #{proId}
+    </select>
+   
+    <select id="queryCollectByUserId" resultType="collectionShopVo" parameterType="int">
+	   	SELECT neuedu_product.name pro_name,neuedu_product.id proId,neuedu_product.main_image,
+		neuedu_product.price,neuedu_collect.userId,neuedu_product.status
+		FROM neuedu_collect
+		LEFT JOIN 
+		neuedu_product
+		ON neuedu_collect.proId = neuedu_product.id
+		WHERE neuedu_collect.userId = #{val}
+    </select>
+</mapper>
